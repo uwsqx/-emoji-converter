@@ -149,3 +149,28 @@ navigator.clipboard.writeText(text);
 alert("コピーしました！");
 
 }
+// 辞書追加
+function addDictionary(){
+
+const char=document.getElementById("newChar").value.trim();
+const emoji=document.getElementById("newEmoji").value.trim();
+
+if(char==="" || emoji===""){
+    alert("文字と絵文字を入力してください");
+    return;
+}
+
+dictionary[char]=emoji;
+
+// 保存
+localStorage.setItem(
+    "emojiDictionary",
+    JSON.stringify(dictionary)
+);
+
+// 入力欄を空にする
+document.getElementById("newChar").value="";
+document.getElementById("newEmoji").value="";
+
+alert("追加しました！");
+}
