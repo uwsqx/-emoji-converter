@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ひらがな→絵文字変換</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🐣 ひらがな → 絵文字変換</h1>
+
+<textarea
+id="inputText"
+placeholder="ここに文字を入力"></textarea>
+
+<div class="buttons">
+
+<button onclick="convertText()">
+変換
+</button>
+
+<button onclick="copyResult()">
+コピー
+</button>
+
+</div>
+
+<h2>変換結果</h2>
+
+<div id="output"></div>
+
+<hr>
+
+<h2>辞書追加</h2>
+
+<input
+id="newChar"
+maxlength="1"
+placeholder="文字">
+
+<input
+id="newEmoji"
+placeholder="絵文字">
+
+<button onclick="addDictionary()">
+追加
+</button>
+
+<p class="info">
+追加した辞書はこの端末に保存されます
+</p>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
