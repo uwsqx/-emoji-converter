@@ -1,179 +1,56 @@
 // ひらがな→絵文字辞書
 let dictionary = {
-"あ":"🐜",
-"い":"🦑",
-"う":"🐮",
-"え":"🦐",
-"お":"🐺",
+  "あ":"💦","い":"🐶","う":"🐮","え":"🖼","お":"👹",
 
-"か":"🦀",
-"き":"🌳",
-"く":"🐻",
-"け":"🦘",
-"こ":"🦊",
+  "か":"🦟","き":"🌳","く":"💭","け":"⚔️","こ":"🈁",
 
-"さ":"🐟",
-"し":"🦌",
-"す":"🦢",
-"せ":"🦗",
-"そ":"🦁",
+  "さ":"🈂️","し":"🦌","す":"🍣","せ":"💺","そ":"🛷",
 
-"た":"🐙",
-"ち":"🐭",
-"つ":"🦅",
-"て":"✋",
-"と":"🐯",
+  "た":"🐙","ち":"🩸","つ":"🌙","て":"✋","と":"🐯",
 
-"な":"🥜",
-"に":"🐔",
-"ぬ":"🐌",
-"ね":"🐱",
-"の":"🧠",
+  "な":"🍐","に":"🥕","ぬ":"🧸","ね":"🐱","の":"🧠",
 
-"は":"🦷",
-"ひ":"🐣",
-"ふ":"🐡",
-"へ":"🐍",
-"ほ":"🦄",
+  "は":"🦷","ひ":"🔥","ふ":"🚢","へ":"🐍","ほ":"📕",
 
-"ま":"🐒",
-"み":"👂",
-"む":"🐛",
-"め":"👀",
-"も":"🍑",
+  "ま":"⭕️","み":"👂","む":"💜","め":"👀","も":"🍑",
 
-"や":"🗻",
-"ゆ":"🦢",
-"よ":"🌙",
+  "や":"🗻","ゆ":"⛄️","よ":"🌃",
 
-"ら":"🦙",
-"り":"🐿️",
-"る":"💎",
-"れ":"🌈",
-"ろ":"🤖",
+  "ら":"💕","り":"🐿","る":"🇷🇴","れ":"🍋","ろ":"🤖",
 
-"わ":"🦅",
-"を":"⭕",
-"ん":"🥖",
+  "わ":"🐊","を":"🎶","ん":"🆖",
 
-"が":"🦍",
-"ぎ":"🎸",
-"ぐ":"🍇",
-"げ":"🦎",
-"ご":"🦍",
+  "が":"🦟゛","ぎ":"🌳゛","ぐ":"💭゛","げ":"⚔️゛","ご":"🈁゛",
 
-"ざ":"🦓",
-"じ":"🦌",
-"ず":"⚡",
-"ぜ":"💰",
-"ぞ":"🐘",
+  "ざ":"🈂️゛","じ":"🦌゛","ず":"🍣゛","ぜ":"💺゛","ぞ":"🛷゛",
 
-"だ":"💧",
-"ぢ":"🌍",
-"づ":"🌊",
-"で":"🚪",
-"ど":"🐲",
+  "だ":"🐙゛","ぢ":"🩸゛","づ":"🌙゛","で":"✋゛","ど":"🐯゛",
 
-"ば":"🍌",
-"び":"🍺",
-"ぶ":"🐷",
-"べ":"🛏️",
-"ぼ":"⚽",
+  "ば":"🦷゛","び":"🔥゛","ぶ":"🚢゛","べ":"🐍゛","ぼ":"📕゛",
 
-"ぱ":"🥐",
-"ぴ":"🫑",
-"ぷ":"🍮",
-"ぺ":"🖊️",
-"ぽ":"🍿",
+  "ぱ":"🦷ﾟ","ぴ":"🔥ﾟ","ぷ":"🚢ﾟ","ぺ":"🐍ﾟ","ぽ":"📕ﾟ",
 
-"ぁ":"🐜",
-"ぃ":"🦑",
-"ぅ":"🐮",
-"ぇ":"🦐",
-"ぉ":"🐺",
+  "ぁ":"💦","ぃ":"🐶","ぅ":"🐮","ぇ":"🖼","ぉ":"👹",
 
-"ゃ":"🗻",
-"ゅ":"🦢",
-"ょ":"🌙",
+  "ゃ":"🗻","ゅ":"⛄️","ょ":"🌃",
 
-"っ":"⭐",
-"ー":"➖"
+  "っ":"🌙",
+  "ー":"ー"
 };
 
 // 保存済み辞書を読み込む
 const saved = localStorage.getItem("emojiDictionary");
 
-if(saved){
-    dictionary = JSON.parse(saved);
+if (saved) {
+  dictionary = JSON.parse(saved);
 }
 
 // カタカナ→ひらがな
-function katakanaToHiragana(str){
-
-return str.replace(/[ァ-ヶ]/g,function(s){
-return String.fromCharCode(s.charCodeAt(0)-0x60);
-});
-
-}
-
-// 変換
-function convertText(){
-
-let text=document.getElementById("inputText").value;
-
-text=katakanaToHiragana(text);
-
-let result="";
-
-for(let ch of text){
-
-if(dictionary[ch]){
-result+=dictionary[ch];
-}else{
-result+=ch;
-}
-
-}
-
-document.getElementById("output").innerText=result;
-
-}
-
-// コピー
-function copyResult(){
-
-let text=document.getElementById("output").innerText;
-
-navigator.clipboard.writeText(text);
-
-alert("コピーしました！");
-
-}
-// 辞書追加
-function addDictionary(){
-
-const char=document.getElementById("newChar").value.trim();
-const emoji=document.getElementById("newEmoji").value.trim();
-
-if(char==="" || emoji===""){
-    alert("文字と絵文字を入力してください");
-    return;
-}
-
-dictionary[char]=emoji;
-
-// 保存
-localStorage.setItem(
-    "emojiDictionary",
-    JSON.stringify(dictionary)
-);
-
-// 入力欄を空にする
-document.getElementById("newChar").value="";
-document.getElementById("newEmoji").value="";
-
-alert("追加しました！");
-}
+function katakanaToHiragana(str) {
+  return str.replace(/[ァ-ヶ]/g, function(s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0x60);
+  });
+} 
 // 変換
 function convertText() {
 
